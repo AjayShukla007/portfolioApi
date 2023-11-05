@@ -3,7 +3,6 @@ const multer = require("multer");
 const router = express.Router();
 router.use(express.json());
 const Notes = require("../models/Notes");
-const Images = require("../models/Image.js");
 const fetchData = require("../middleware/getUser");
 
 const upload = multer({ storage: multer.memoryStorage() });
@@ -38,15 +37,6 @@ router.post(
         user: req.user.id,
       });
       const saveProject = await newNote.save();
-      /*const newImage = new Images({
-        image,
-        user: req.user.id
-      });
-      const saveImage = await newImage.save();
-      res.json({
-        data:saveProject,
-        image:saveImage
-      });*/
     } catch (e) {
       res.status(500).json({ error: e, stfu: "server error1" });
       console.log(e);
