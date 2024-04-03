@@ -204,5 +204,5 @@ router.delete("/deleteEdu/:id", fetchData, async (req, res) => {
     res.status(500).json({ error: e });
   }
 });
-
+ 
 module.exports = router;
