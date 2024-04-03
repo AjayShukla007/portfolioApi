@@ -73,7 +73,7 @@ router.delete("/deleteAbout/:id", fetchData, async (req, res) => {
 });
 
 // CERTIFICATION
-// Route one creating cert data
+// Route one creating Certification data
 router.post("/addCert", fetchData, async (req, res) => {
   try {
     const { name, description, date, type, learned, provider } = req.body;
@@ -88,7 +88,7 @@ router.post("/addCert", fetchData, async (req, res) => {
     console.log(e);
   }
 });
-// Route 2 getting about
+// Route 2 getting Certification
 router.get("/getCert", fetchData, async (req, res) => {
   try {
     const cert = await CertSchema.find({ user: req.user.id });
@@ -98,7 +98,7 @@ router.get("/getCert", fetchData, async (req, res) => {
     console.log(e);
   }
 });
-// Route 3 updating about
+// Route 3 updating Certification
 router.patch("/updateCert/:id", fetchData, async (req, res) => {
   try {
     const certId = req.params.id;
@@ -118,7 +118,7 @@ router.patch("/updateCert/:id", fetchData, async (req, res) => {
     res.status(500).json({ error: e, message: "error updating cert" });
   }
 });
-// Route 4 deleting about
+// Route 4 deleting Certification
 router.delete("/deleteCert/:id", fetchData, async (req, res) => {
   try {
     const certId = req.params.id;
@@ -138,7 +138,7 @@ router.delete("/deleteCert/:id", fetchData, async (req, res) => {
 });
 
 // EDUCATION
-// Route one creating edu data
+// Route one creating Education data
 router.post("/addEdu", fetchData, async (req, res) => {
   try {
     const { collage, name, year, location } = req.body;
@@ -156,7 +156,7 @@ router.post("/addEdu", fetchData, async (req, res) => {
     console.log(e);
   }
 });
-// Route 2 getting about
+// Route 2 getting Education
 router.get("/getEdu", fetchData, async (req, res) => {
   try {
     const edu = await EduSchema.find({ user: req.user.id });
@@ -166,7 +166,7 @@ router.get("/getEdu", fetchData, async (req, res) => {
     console.log(e);
   }
 });
-// Route 3 updating about
+// Route 3 updating Education
 router.patch("/updateEdu/:id", fetchData, async (req, res) => {
   try {
     const eduId = req.params.id;
@@ -186,7 +186,7 @@ router.patch("/updateEdu/:id", fetchData, async (req, res) => {
     res.status(500).json({ error: e, message: "error updating edu" });
   }
 });
-// Route 4 deleting about
+// Route 4 deleting Education
 router.delete("/deleteEdu/:id", fetchData, async (req, res) => {
   try {
     const eduId = req.params.id;
