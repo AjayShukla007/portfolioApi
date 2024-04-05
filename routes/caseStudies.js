@@ -29,17 +29,6 @@ router.post("/postCs", fetchData, async (req, res) => {
   }
 });
 
-// router.get("/getCs", fetchData, async (req, res) => {
-//   try {
-//     const caseStudies = await CaseStudies.find({ user: req.user.id });
-//     res.json(caseStudies);
-//   } catch (e) {
-//     res.status(500).json({
-//       message: "could not send case studies data right now",
-//       error: e
-//     });
-//   }
-// });
 router.get("/getCs/:title", fetchData, async (req, res) => {
   try {
     const { title } = req.params;
