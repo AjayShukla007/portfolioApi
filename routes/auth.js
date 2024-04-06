@@ -1,5 +1,4 @@
 const express = require("express");
-// const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -15,7 +14,6 @@ const fetchData = require("../middleware/getUser");
 router.post(
   "/singUp",
   async (req, res) => {
-    //console.log(req.body);
     try {
       //CREATE NEW USER
       //Securing Passwords of users
