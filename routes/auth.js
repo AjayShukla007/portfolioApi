@@ -35,7 +35,7 @@ router.post(
       };
       const authToken = jwt.sign(data, process.env.JWT_secret);
 
-      // res.json(user);//debug
+      
       res.json({ authToken });
     } catch (e) {
       console.error(e.messege);
@@ -62,9 +62,7 @@ router.post(
         });
       }
       const checkPass = await bcrypt.compare(password, user.password);
-      // console.log(await bcrypt.compare(password, user.password));//debug
       if (!checkPass) {
-        // console.log("userpass " + user.password + " " + "pass " + password);
         return res.status(400).json({
           error:
             "unable to login, try again using current userName and password"
@@ -85,7 +83,6 @@ router.post(
 );
 
 //USER ROUTE 3
-// Getting user data
 router.get("/getData", fetchData, async (req, res) => {
   try {
     const userId = req.user.id;
