@@ -45,4 +45,9 @@ router.post("/mailMe", fetchData, async (req, res) => {
   }
 });
 
+router.post("/captchaVerify", fetchData, async (req, res) => {
+  const { token } = req.body;
+  res.status(200).send({ token: token, message: "works" });
+});
+
 module.exports = router;
