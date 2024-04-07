@@ -14,3 +14,30 @@ router.get("/getProject", fetchData, async (req, res) => {
     res.status(500).json({ error: e });
   }
 });
+
+
+//NOTES ROUTE 2:
+//Creating Project
+router.post(
+  "/addProject",
+  fetchData,
+  async (req, res) => {
+    try {
+      const { title, tags, description, source, live, image, grade } = req.body;
+      const newNote = new Notes({
+        title,
+        tags,
+        description,
+        source,
+        live,
+        image,
+        grade,
+        user: req.user.id,
+      });
+      const saveProject = await newNote.save();
+    } catch (e) {
+      res.status(500).json({ error: e, stfu: "server error1" });
+      console.log(e);
+    }
+  }
+);
