@@ -41,3 +41,48 @@ router.post(
     }
   }
 );
+
+// Update a project
+router.patch("/updateProject/:id", fetchData, async (req, res) => {
+  try {
+    const projectId = req.params.id;
+    const updatedFields = req.body;
+
+    const updateProject = await Notes.findByIdAndUpdate(projectId, updatedFields, { new: true });
+
+    if (!updateProject) {
+      return res.status(404).json({
+        message: "project not found"
+      });
+    }
+    res.status(200).json({
+      mesaage: "project updated successfully"
+    });
+  } catch (e) {
+    res.status(500).json({
+      message: "server error",
+      error:e
+    });
+  }
+});
+// Delete a project by ID
+router.delete("/deleteProject/:id", fetchData, async (req, res) => {
+  try {
+    const noteId = req.params.id;
+    const deletedNote = await Notes.findByIdAndRemove(noteId);
+
+    if (!deletedNote) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    res.status(200).json({
+      message: "Project deleted successfully",
+      deletedNote
+    });
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+
+module.exports = router;
