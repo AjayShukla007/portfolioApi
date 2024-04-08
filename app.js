@@ -12,16 +12,13 @@ app.use(cors());
 app.use(logger);
 
 app.use(process.env.AUTH_ENDPOINT, require("./routes/auth"));
-app.use(process.env.PROJECT_ENDPOINT, require("./routes/notes"));
-app.use(process.env.BLOG_ENDPOINT, require("./routes/blogs"));
 
-app.use(errorHandler);
 connectToMongo();
 
-app.get('/test', (req, res) => {
+/* app.get('/test', (req, res) => {
   res.send('Hello, Express!');
 });
-
+ */
 mongoose.connection.once("open", () => {
   console.log("connected to mongo db");
   // STARTING SERVER
