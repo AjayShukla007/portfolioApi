@@ -18,6 +18,7 @@ app.use(process.env.ABOUT_ENDPOINT, require("./routes/about"));
 app.use(process.env.CASESTUDIES_ENDPOINT, require("./routes/caseStudies.js"));
 app.use(process.env.MAIL_ENDPOINT, require("./routes/getInTouch"));
 
+app.use(errorHandler);
 connectToMongo();
 
 /* app.get('/test', (req, res) => {
