@@ -16,7 +16,9 @@ app.use(process.env.PROJECT_ENDPOINT, require("./routes/notes"));
 app.use(process.env.BLOG_ENDPOINT, require("./routes/blogs"));
 app.use(process.env.ABOUT_ENDPOINT, require("./routes/about"));
 app.use(process.env.CASESTUDIES_ENDPOINT, require("./routes/caseStudies.js"));
+app.use(process.env.MAIL_ENDPOINT, require("./routes/getInTouch"));
 
+connectToMongo();
 
 /* app.get('/test', (req, res) => {
   res.send('Hello, Express!');
