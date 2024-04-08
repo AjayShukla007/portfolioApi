@@ -12,6 +12,7 @@ app.use(cors());
 app.use(logger);
 
 app.use(process.env.AUTH_ENDPOINT, require("./routes/auth"));
+app.use(process.env.PROJECT_ENDPOINT, require("./routes/notes"));
 
 connectToMongo();
 
