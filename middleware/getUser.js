@@ -11,6 +11,6 @@ const fetchData = (req, res, next) => {
   } catch (e) {
     res.status(401).send({ error: "server error, Authentication failed 2" });
   }
-  next();
+  next(); 
 };
 module.exports = fetchData;
