@@ -44,14 +44,18 @@ router.post(
 
 //USER ROUTE 2
 // Login user using POST and authenticating user
+// const storedUser = process.env.USER
+// const storedPass = process.env.API_PASS
 router.post(
   "/singIn",
   async (req, res) => {
 
     // CHECKING IF USER EXIST
     const { userName, password } = req.body;
-
+    // console.log(userName, password);
+    // console.log(storedUser, storedPass);
     try {
+      // const user = await User.findOne({ userName });
       const user = await User.findOne({ userName });
       if (!user) {
         return res.status(400).json({
@@ -59,11 +63,11 @@ router.post(
             "unable to login, try again using current userName and password"
         });
       }
-      const checkPass = await bcrypt.compare(password, user.password);
+      const checkPass = bcrypt.compare(password, user.password);
       if (!checkPass) {
         return res.status(400).json({
           error:
-            "unable to login, try again using current userName and password"
+            "unable to login, try again using currect userName and password 2"
         });
       }
       const data = {
