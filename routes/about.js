@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 router.use(express.json());
 
-const { AboutSchema, CertSchema, EduSchema } = require('../models/About.js');
+const { AboutSchema, CertSchema, EduSchema } = require("../models/About.js");
 const fetchData = require("../middleware/getUser");
 
 // ABOUT
@@ -14,7 +14,7 @@ router.post("/addAbout", fetchData, async (req, res) => {
       intro,
       skills,
       color,
-      user: req.user.id
+      user: req.user.id,
     });
     const saveIntro = await newIntro.save();
     res.status(200).json({ message: "added" });
@@ -38,16 +38,20 @@ router.patch("/updateAbout/:id", fetchData, async (req, res) => {
   try {
     const introId = req.params.id;
     const updateFields = req.body;
-    const updateIntro = await AboutSchema.findByIdAndUpdate(introId, updateFields, {
-      new: true
-    });
+    const updateIntro = await AboutSchema.findByIdAndUpdate(
+      introId,
+      updateFields,
+      {
+        new: true,
+      }
+    );
     if (!updateIntro) {
       return res.status(404).json({
-        message: "about not found"
+        message: "about not found",
       });
     }
     res.status(200).json({
-      mesaage: "about updated successfully"
+      mesaage: "about updated successfully",
     });
   } catch (e) {
     res.status(500).json({ error: e, message: "error updating about" });
@@ -65,7 +69,7 @@ router.delete("/deleteAbout/:id", fetchData, async (req, res) => {
 
     res.status(200).json({
       message: "About deleted successfully",
-      deletedIntro
+      deletedIntro,
     });
   } catch (e) {
     res.status(500).json({ error: e });
@@ -78,8 +82,13 @@ router.post("/addCert", fetchData, async (req, res) => {
   try {
     const { name, description, date, type, learned, provider } = req.body;
     const newCert = new CertSchema({
-      name, description, date, type, learned, provider,
-      user: req.user.id
+      name,
+      description,
+      date,
+      type,
+      learned,
+      provider,
+      user: req.user.id,
     });
     const saveCert = await newCert.save();
     res.status(200).json({ message: "added" });
@@ -103,16 +112,20 @@ router.patch("/updateCert/:id", fetchData, async (req, res) => {
   try {
     const certId = req.params.id;
     const updateFields = req.body;
-    const updateCert = await CertSchema.findByIdAndUpdate(certId, updateFields, {
-      new: true
-    });
+    const updateCert = await CertSchema.findByIdAndUpdate(
+      certId,
+      updateFields,
+      {
+        new: true,
+      }
+    );
     if (!updateCert) {
       return res.status(404).json({
-        message: "cert not found"
+        message: "cert not found",
       });
     }
     res.status(200).json({
-      mesaage: "cert updated successfully"
+      mesaage: "cert updated successfully",
     });
   } catch (e) {
     res.status(500).json({ error: e, message: "error updating cert" });
@@ -130,7 +143,7 @@ router.delete("/deleteCert/:id", fetchData, async (req, res) => {
 
     res.status(200).json({
       message: "Certification deleted successfully",
-      deletedCert
+      deletedCert,
     });
   } catch (e) {
     res.status(500).json({ error: e });
@@ -143,11 +156,11 @@ router.post("/addEdu", fetchData, async (req, res) => {
   try {
     const { collage, name, year, location } = req.body;
     const newEdu = new EduSchema({
-      collage, 
-      name, 
-      year, 
+      collage,
+      name,
+      year,
       location,
-      user: req.user.id
+      user: req.user.id,
     });
     const saveCert = await newEdu.save();
     res.status(200).json({ message: "added" });
@@ -172,15 +185,15 @@ router.patch("/updateEdu/:id", fetchData, async (req, res) => {
     const eduId = req.params.id;
     const updateFields = req.body;
     const updateEdu = await EduSchema.findByIdAndUpdate(eduId, updateFields, {
-      new: true
+      new: true,
     });
     if (!updateEdu) {
       return res.status(404).json({
-        message: "edu not found"
+        message: "edu not found",
       });
     }
     res.status(200).json({
-      mesaage: "edu updated successfully"
+      mesaage: "edu updated successfully",
     });
   } catch (e) {
     res.status(500).json({ error: e, message: "error updating edu" });
@@ -198,11 +211,11 @@ router.delete("/deleteEdu/:id", fetchData, async (req, res) => {
 
     res.status(200).json({
       message: "Education deleted successfully",
-      deletedEdu
+      deletedEdu,
     });
   } catch (e) {
     res.status(500).json({ error: e });
   }
 });
- 
+
 module.exports = router;
