@@ -15,7 +15,7 @@ router.post("/addBlog", fetchData, async (req, res) => {
       link,
       tags,
       date,
-      user: req.user.id
+      user: req.user.id,
     });
     const saveBlog = await newBlog.save();
     res.status(200).json({ message: "added" });
@@ -42,15 +42,15 @@ router.patch("/updateBlog/:id", fetchData, async (req, res) => {
     const blogId = req.params.id;
     const updateFields = req.body;
     const updateBlog = await Blogs.findByIdAndUpdate(blogId, updateFields, {
-      new: true
+      new: true,
     });
     if (!updateBlog) {
       return res.status(404).json({
-        message: "blog not found"
+        message: "blog not found",
       });
     }
     res.status(200).json({
-      mesaage: "blog updated successfully"
+      mesaage: "blog updated successfully",
     });
   } catch (e) {
     res.status(500).json({ error: e, message: "error updating blog" });
@@ -68,12 +68,11 @@ router.delete("/deleteBlog/:id", fetchData, async (req, res) => {
 
     res.status(200).json({
       message: "Blog deleted successfully",
-      deletedBlog
+      deletedBlog,
     });
   } catch (e) {
     res.status(500).json({ error: e });
   }
 });
-
 
 module.exports = router;
