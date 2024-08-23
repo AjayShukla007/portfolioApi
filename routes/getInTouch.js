@@ -21,14 +21,14 @@ router.post("/mailMe", fetchData, async (req, res) => {
         service: "Gmail",
         auth: {
           user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASSWORD
-        }
+          pass: process.env.EMAIL_PASSWORD,
+        },
       });
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to: process.env.RECIPIENT_EMAIL,
         subject: `${subject || "unknown reason"}`,
-        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       };
 
       await transporter.sendMail(mailOptions);
@@ -37,7 +37,7 @@ router.post("/mailMe", fetchData, async (req, res) => {
         .status(200)
         .json({ message: "Message submitted successfully!" });
     } else {
-      res.status(404).send({message:"bots not allowed"});
+      res.status(404).send({ message: "bots not allowed" });
     }
   } catch (error) {
     console.error(error);
