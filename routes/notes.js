@@ -15,32 +15,27 @@ router.get("/getProject", fetchData, async (req, res) => {
   }
 });
 
-
 //NOTES ROUTE 2:
 //Creating Project
-router.post(
-  "/addProject",
-  fetchData,
-  async (req, res) => {
-    try {
-      const { title, tags, description, source, live, image, grade } = req.body;
-      const newNote = new Notes({
-        title,
-        tags,
-        description,
-        source,
-        live,
-        image,
-        grade,
-        user: req.user.id,
-      });
-      const saveProject = await newNote.save();
-    } catch (e) {
-      res.status(500).json({ error: e, stfu: "server error1" });
-      console.log(e);
-    }
+router.post("/addProject", fetchData, async (req, res) => {
+  try {
+    const { title, tags, description, source, live, image, grade } = req.body;
+    const newNote = new Notes({
+      title,
+      tags,
+      description,
+      source,
+      live,
+      image,
+      grade,
+      user: req.user.id,
+    });
+    const saveProject = await newNote.save();
+  } catch (e) {
+    res.status(500).json({ error: e, stfu: "server error1" });
+    console.log(e);
   }
-);
+});
 
 // Update a project
 router.patch("/updateProject/:id", fetchData, async (req, res) => {
@@ -48,20 +43,24 @@ router.patch("/updateProject/:id", fetchData, async (req, res) => {
     const projectId = req.params.id;
     const updatedFields = req.body;
 
-    const updateProject = await Notes.findByIdAndUpdate(projectId, updatedFields, { new: true });
+    const updateProject = await Notes.findByIdAndUpdate(
+      projectId,
+      updatedFields,
+      { new: true }
+    );
 
     if (!updateProject) {
       return res.status(404).json({
-        message: "project not found"
+        message: "project not found",
       });
     }
     res.status(200).json({
-      mesaage: "project updated successfully"
+      mesaage: "project updated successfully",
     });
   } catch (e) {
     res.status(500).json({
       message: "server error",
-      error:e
+      error: e,
     });
   }
 });
@@ -77,12 +76,11 @@ router.delete("/deleteProject/:id", fetchData, async (req, res) => {
 
     res.status(200).json({
       message: "Project deleted successfully",
-      deletedNote
+      deletedNote,
     });
   } catch (e) {
     res.status(500).json({ error: e });
   }
 });
-
 
 module.exports = router;
