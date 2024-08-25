@@ -2,88 +2,88 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const AboutSchema = new Schema({
-  user:{
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "logUser"
+    ref: "logUser",
   },
   intro: {
     type: String,
-    required: true
+    required: true,
   },
   skills: {
     type: String,
-    required: true
+    required: true,
   },
   color: {
     type: String,
   },
   loginDate: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 const CertSchema = new Schema({
-  user:{
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "logUser"
+    ref: "logUser",
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    required: true
+    required: true,
   },
   learned: {
-    type: String
+    type: String,
   },
-  provider:{
-    type: String
+  provider: {
+    type: String,
   },
   loginDate: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 const EduSchema = new Schema({
-  user:{
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "logUser"
+    ref: "logUser",
   },
   collage: {
     type: String,
-    required: true
+    required: true,
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   year: {
     type: String,
-    required: true
+    required: true,
   },
   location: {
     type: String,
-    required: true
+    required: true,
   },
   loginDate: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 // module.exports = mongoose.model("about", AboutSchema);
 module.exports = {
-  AboutSchema: mongoose.model('about', AboutSchema),
-  CertSchema: mongoose.model('certification', CertSchema),
-  EduSchema: mongoose.model('education', EduSchema),
+  AboutSchema: mongoose.model("about", AboutSchema),
+  CertSchema: mongoose.model("certification", CertSchema),
+  EduSchema: mongoose.model("education", EduSchema),
 };
