@@ -4,32 +4,32 @@ const { Schema } = mongoose;
 const CaseStudiesSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "logUser"
+    ref: "logUser",
   },
   title: {
-    type: String
+    type: String,
   },
   id: {
-    type: String
+    type: String,
   },
   description: {
-    type: String
+    type: String,
   },
   flow: {
-    type: String
+    type: String,
   },
   techUsed: {
-    type: String
+    type: String,
   },
   feature: {
-    type: String
+    type: String,
   },
   motivation: {
-    type: String
+    type: String,
   },
   conclusion: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("caseStudies", CaseStudiesSchema);
