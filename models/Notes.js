@@ -4,36 +4,36 @@ const { Schema } = mongoose;
 const NotesSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "logUser"
+    ref: "logUser",
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   tags: {
     type: String,
-    required: true
+    required: true,
   },
   source: {
-    type: String
+    type: String,
   },
   live: {
-    type: String
+    type: String,
   },
   image: {
-    type: String
+    type: String,
   },
   grade: {
-    type: String
+    type: String,
   },
   lastEdited: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("projects", NotesSchema);
