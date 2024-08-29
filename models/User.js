@@ -4,25 +4,25 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   userName: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   email: {
     type: String,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   loginDate: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 const User = mongoose.model("owner", UserSchema);
 // User.createIndexes();
