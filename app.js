@@ -1,9 +1,9 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const connectToMongo = require('./db.js');
+const connectToMongo = require("./db.js");
 const { logger, logEvents } = require("./middleware/logger.js");
 const errorHandler = require("./middleware/errorHandler.js");
 
@@ -33,8 +33,7 @@ mongoose.connection.once("open", () => {
   });
 });
 
-
-mongoose.connection.on("error", err => {
+mongoose.connection.on("error", (err) => {
   console.log(err);
   logEvents(
     `${err.no}\t${err.code}\t${err.syscall}\t${err.hostname}`,
