@@ -9,6 +9,7 @@ const errorHandler = require("./middleware/errorHandler.js");
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 app.use(logger);
 
 app.use(process.env.AUTH_ENDPOINT, require("./routes/auth"));
@@ -21,15 +22,15 @@ app.use(process.env.MAIL_ENDPOINT, require("./routes/getInTouch"));
 app.use(errorHandler);
 connectToMongo();
 
-/* app.get('/test', (req, res) => {
-  res.send('Hello, Express!');
+app.get("/", (req, res) => {
+  res.send("Welcome to the Portfolio Backend");
 });
- */
+
 mongoose.connection.once("open", () => {
   console.log("connected to mongo db");
   // STARTING SERVER
-  app.listen(3000, () => {
-    console.log("Server started on port 3000");
+  app.listen(5000, () => {
+    console.log("Server started on port 5000");
   });
 });
 

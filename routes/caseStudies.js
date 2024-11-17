@@ -41,7 +41,8 @@ router.post("/postCs", fetchData, async (req, res) => {
 router.get("/getCs/:title", fetchData, async (req, res) => {
   try {
     const { title } = req.params;
-    const data = await CaseStudies.find({ title }); // Query MongoDB for relevant data
+    const filterTitle = title.replace(/-/g, " ");
+    const data = await CaseStudies.find({ title: filterTitle }); // Query MongoDB for relevant data
     res.json(data);
   } catch (e) {
     res.status(500).json({
