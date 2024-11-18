@@ -22,6 +22,28 @@ const AboutSchema = new Schema({
     default: Date.now,
   },
 });
+const ExperienceSchema = new Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "logUser",
+  },
+  company: {
+    type: String,
+    required: true,
+  },
+  position: {
+    type: String,
+    required: true,
+  },
+  duration: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+});
 const CertSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -86,4 +108,5 @@ module.exports = {
   AboutSchema: mongoose.model("about", AboutSchema),
   CertSchema: mongoose.model("certification", CertSchema),
   EduSchema: mongoose.model("education", EduSchema),
+  ExperienceSchema: mongoose.model("experience", ExperienceSchema),
 };
