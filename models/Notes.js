@@ -30,6 +30,15 @@ const NotesSchema = new Schema({
   grade: {
     type: String,
   },
+  projectType: {
+    type: String,
+    enum: ['personal', 'professional'],
+    required: true
+  },
+  company: {
+    type: String,
+    // Only required if projectType is professional
+  },
   lastEdited: {
     type: Date,
     default: Date.now,

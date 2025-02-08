@@ -19,7 +19,25 @@ router.get("/getProject", fetchData, async (req, res) => {
 //Creating Project
 router.post("/addProject", fetchData, async (req, res) => {
   try {
-    const { title, tags, description, source, live, image, grade } = req.body;
+    const { 
+      title, 
+      tags, 
+      description, 
+      source, 
+      live, 
+      image, 
+      grade,
+      projectType,
+      company 
+    } = req.body;
+
+    // Validate projectType and company
+    if (projectType === 'professional' && !company) {
+      return res.status(400).json({ 
+        error: "Company name is required for professional projects" 
+      });
+    }
+
     const newNote = new Notes({
       title,
       tags,
@@ -28,11 +46,19 @@ router.post("/addProject", fetchData, async (req, res) => {
       live,
       image,
       grade,
+      projectType,
+      company,
       user: req.user.id,
     });
+    
     const saveProject = await newNote.save();
+    res.status(200).json({ 
+      message: "Project added successfully",
+      project: saveProject 
+    });
+    
   } catch (e) {
-    res.status(500).json({ error: e, stfu: "server error1" });
+    res.status(500).json({ error: e, message: "Internal server error" });
     console.log(e);
   }
 });
