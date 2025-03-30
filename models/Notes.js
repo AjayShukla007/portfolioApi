@@ -32,7 +32,7 @@ const NotesSchema = new Schema({
   },
   projectType: {
     type: String,
-    enum: ['personal', 'professional'],
+    enum: ['personal', 'professional', 'open'],
     required: true
   },
   company: {
