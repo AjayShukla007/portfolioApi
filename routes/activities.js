@@ -30,7 +30,10 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const { title, description, activityType, relatedProject, link, icon } = req.body;
+      const { title, description, activityType, relatedProject, link, icon, date } = req.body;
+      
+      // Debug log
+      console.log("Received date:", date, typeof date);
 
       // If there are errors, return Bad request and the errors
       const errors = validationResult(req);
@@ -45,6 +48,7 @@ router.post(
         relatedProject,
         link,
         icon,
+        date: date || Date.now(),
         user: req.user.id,
       });
       
@@ -59,7 +63,7 @@ router.post(
 
 // ROUTE 3: Update an existing activity: PUT "/api/activities/:id"
 router.put("/:id", fetchData, async (req, res) => {
-  const { title, description, activityType, relatedProject, link, icon } = req.body;
+  const { title, description, activityType, relatedProject, link, icon, date } = req.body;
   try {
     // Create a new activity object
     const newActivity = {};
@@ -69,7 +73,8 @@ router.put("/:id", fetchData, async (req, res) => {
     if (relatedProject) newActivity.relatedProject = relatedProject;
     if (link) newActivity.link = link;
     if (icon) newActivity.icon = icon;
-
+    if (date) newActivity.date = date;
+    
     // Find the activity to be updated and update it
     let activity = await Activity.findById(req.params.id);
     if (!activity) {
