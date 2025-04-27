@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Activity = require("../models/Activity");
 const { body, validationResult } = require("express-validator");
-const fetchuser = require("../middleware/fetchuser");
+const fetchData = require("../middleware/getUser");
 
 // ROUTE 1: Get all activities: GET "/api/activities"
 router.get("/", async (req, res) => {
@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
 // ROUTE 2: Add a new activity: POST "/api/activities"
 router.post(
   "/",
-  fetchuser,
+  fetchData,
   [
     body("title", "Enter a valid title").isLength({ min: 3 }),
     body("description", "Description must be at least 5 characters").isLength({
@@ -58,7 +58,7 @@ router.post(
 );
 
 // ROUTE 3: Update an existing activity: PUT "/api/activities/:id"
-router.put("/:id", fetchuser, async (req, res) => {
+router.put("/:id", fetchData, async (req, res) => {
   const { title, description, activityType, relatedProject, link, icon } = req.body;
   try {
     // Create a new activity object
@@ -89,7 +89,7 @@ router.put("/:id", fetchuser, async (req, res) => {
 });
 
 // ROUTE 4: Delete an activity: DELETE "/api/activities/:id"
-router.delete("/:id", fetchuser, async (req, res) => {
+router.delete("/:id", fetchData, async (req, res) => {
   try {
     // Find the activity to be deleted and delete it
     let activity = await Activity.findById(req.params.id);
